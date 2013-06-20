@@ -941,7 +941,7 @@
     \\ %
     \setcounter{choicegroupnumchoices}{-1} %
   \fi %
-  \protectedimmediatewrite\sdapsoutfile{QObject-Choice=#1}%
+  \protectedimmediatewrite\sdapsoutfile{QObject-SingleChoice=#1}%
   {\usekomafont{choicegrouplinefont}\strut#1\strut} \@sdaps@choicegroup@boxes \\ %
 }
 
@@ -1013,7 +1013,7 @@
   \setcounter{choiceitems}{1}%
   \setcounter{maxchoiceitems}{#1}%
   \question{#2}%
-  \protectedimmediatewrite\sdapsoutfile{QObject-Choice=\arabic{section}.\arabic{subsection}. #2}%
+  \protectedimmediatewrite\sdapsoutfile{QObject-SingleChoice=\arabic{section}.\arabic{subsection}. #2}%
   \tabularx{\linewidth}{*{\themaxchoiceitems}{X}}%
   % We insert dummy elements into each cell, because otherwise there may be
   % layouting issues.
