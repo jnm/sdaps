@@ -219,6 +219,25 @@ class Choice(Question):
         return answer
 
 
+class SingleChoice(Choice):
+    
+    def get_answer(self):
+        '''it's the value of a single answer!
+        returns -1 if no answer exists
+        '''
+        best_box = None
+        for box in self.boxes[1:]:
+            if box.data.state:
+                if best_box is None:
+                    best_box = box
+                elif box.data.quality > best_box.data.quality:
+                    best_box = box
+        if best_box is None:
+            return -1
+        else:
+            return best_box.value
+
+
 class Mark(Question):
 
     def init_attributes(self):

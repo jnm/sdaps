@@ -127,6 +127,15 @@ class Choice(Question):
         self.ref_values = self.values
 
 
+class SingleChoice(Choice):
+    
+    def read(self):
+        answer = self.obj.get_answer()
+        if answer != -1:
+            self.count += 1
+            self.values[answer] += 1
+
+
 class Mark(Question):
     """
     :ivar count: Number of times the question was answered.
