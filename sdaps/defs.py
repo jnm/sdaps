@@ -109,9 +109,8 @@ checkbox_metrics = {}
 # values have a look at the output of "boxgallery". Any suggestions
 # for improvements(also algorithmic wise) are always welcome!
 checkbox_metrics['coverage'] = \
-    [(0, 0, 1.0), (0.02, 0, 0.9), (0.05, 0, 0.5), (0.05, 1, 0.5),
-     (1.0, 1, 1.0), (2, 1, 1.0)]
-     #(0.7, 0, 0.3), (1.0, 0, 0.6)]
+    [(0, 0, 1.0), (0.02, 0, 0.9), (0.03, 0, 0.5), (0.03, 1, 0.5),
+     (0.09, 1, 1.0), (0.4, 1, 1.0), (1.0, 1, 1.0), (99, 1, 1.0)]
 checkbox_metrics['cov-lines-removed'] = [(0, 0, 0), (0, 0, 0)]
 checkbox_metrics['cov-min-size'] = [(0, 0, 0), (0, 0, 0)]
 
