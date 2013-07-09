@@ -54,6 +54,7 @@ def main(local_run=False):
     import boxgallery
     import cover
     import csvdata
+    import find_global_id
     import gui
     import ids
     import info
