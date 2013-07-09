@@ -916,9 +916,16 @@
   \protectedimmediatewrite\sdapsoutfile{QObject-Head=\arabic{section}. #1}
 }
 
+% jnm conditionally omit choice group labels
+\newif\ifOmitChoiceGroupLabel
 
 \newenvironment{choicegroup}[1]{%
-  \question{#1}%
+  % jnm if question text, which we don't usually care about, is 'quiet', omit labels
+  \ifstr{#1}{quiet}{\OmitChoiceGroupLabeltrue}{\OmitChoiceGroupLabelfalse}
+  % jnm manually increment subsection counter and don't call \question
+  \addtocounter{subsection}{1}
+  %\subsection*{}
+  %\question{#1}%
   \protectedimmediatewrite\sdapsoutfile{QObject-Head=\arabic{section}.\arabic{subsection}. #1} %
   \setcounter{choicegroupnumchoices}{0} %
   \global\def\@sdaps@choicegroup@start{\tabularx{\linewidth}{X*{\thechoicegroupnumchoices}{c}}} %
@@ -937,8 +944,12 @@
   % This is not really elegant, couldn't we just check whether choicegroup@start
   % is empty?
   \ifnum\thechoicegroupnumchoices>0
-    % Move to the next line (as it is not part of the @start macro)
-    \\ %
+    \ifOmitChoiceGroupLabel
+      % jnm do not move to the next line if we didn't print any labels
+    \else
+      % Move to the next line (as it is not part of the @start macro)
+      \\ %
+    \fi
     \setcounter{choicegroupnumchoices}{-1} %
   \fi %
   \protectedimmediatewrite\sdapsoutfile{QObject-SingleChoice=#1}%
@@ -952,8 +963,12 @@
     \PackageError{sdaps}{Tried to add a new choice, but not at the beginning of a choicegroup environment!}\@ehb
   \else
     \stepcounter{choicegroupnumchoices}%
-    \g@addto@macro{\@sdaps@choicegroup@start}{& {\usekomafont{choicegroupchoicefont}\strut#1}}%
-    \g@addto@macro{\@sdaps@choicegroup@boxes}{& \protectedimmediatewrite\sdapsoutfile{Answer-Choice=#1} \checkbox}%
+    \ifOmitChoiceGroupLabel
+      % jnm do not add the top labels to the macro
+    \else
+      \g@addto@macro{\@sdaps@choicegroup@start}{& {\usekomafont{choicegroupchoicefont}\strut#1}} % jnm adds the top labels
+    \fi
+    \g@addto@macro{\@sdaps@choicegroup@boxes}{& \protectedimmediatewrite\sdapsoutfile{Answer-Choice=#1} \checkbox} % jnm adds the checkboxes
   \fi
 }
 
