@@ -209,14 +209,33 @@ class Choice(Question):
             [unicode(box) for box in self.boxes]
         )
 
+    '''
     def get_answer(self):
-        '''it's a list containing all selected values
-        '''
+        ''it's a list containing all selected values
+        ''
         answer = list()
         for box in self.boxes:
             if box.data.state:
                 answer.append(box.value)
         return answer
+    '''
+
+    def get_answer(self):
+        # from SingleChoice
+        '''it's the value of a single answer!
+        returns -1 if no answer exists
+        '''
+        best_box = None
+        for box in self.boxes[1:]:
+            if box.data.state:
+                if best_box is None:
+                    best_box = box
+                elif box.data.quality > best_box.data.quality:
+                    best_box = box
+        if best_box is None:
+            return -1
+        else:
+            return best_box.value
 
 
 class SingleChoice(Choice):

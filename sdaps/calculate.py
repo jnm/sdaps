@@ -109,10 +109,19 @@ class Choice(Question):
         self.values = {box.value: 0 for box in self.obj.boxes}
         self.significant = {box.value: 0 for box in self.obj.boxes}
 
+    '''
     def read(self):
         self.count += 1
         for item in self.obj.get_answer():
             self.values[item] += 1
+    '''
+
+    def read(self):
+        # from SingleChoice
+        answer = self.obj.get_answer()
+        if answer != -1:
+            self.count += 1
+            self.values[answer] += 1
 
     def calculate(self):
         if self.count:
