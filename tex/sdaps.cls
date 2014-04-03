@@ -976,7 +976,7 @@
     \\ %
     \setcounter{choicegroupnumchoices}{-1} %
   \fi %
-  \protectedimmediatewrite\sdapsoutfile{QObject-SingleChoice=#1}%
+  \protectedimmediatewrite\sdapsoutfile{QObject-Choice=#1}%
   {\usekomafont{choicegrouplinefont}\strut#1\strut} \@sdaps@choicegroup@boxes \\ %
 }
 
