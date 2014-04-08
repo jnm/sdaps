@@ -81,9 +81,13 @@ class Choice(model.buddy.Buddy):
     obj_class = model.questionnaire.Choice
 
     def export_header(self):
+        # just assume everything is in one section and
+        # don't include the section id
+        return [str(self.obj.id[-1])]
         return [self.obj.id_csv(box.id) for box in self.obj.boxes]
 
     def export_data(self):
+        return {str(self.obj.id[-1]): chr(self.obj.get_answer() + ord('A'))}
         return dict([(self.obj.id_csv(box.id), box.csvdata.export_data()) for box in self.obj.boxes])
         return {self.obj.id_csv(box.id) : box.csvdata.export_data() for box in self.obj.boxes}
 

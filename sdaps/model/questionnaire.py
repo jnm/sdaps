@@ -226,12 +226,15 @@ class Choice(Question):
         returns -1 if no answer exists
         '''
         best_box = None
-        for box in self.boxes[1:]:
+        for box in self.boxes:
+            #print self.question, box.text, box.value, box.data.metrics['coverage']
             if box.data.state:
                 if best_box is None:
                     best_box = box
                 elif box.data.quality > best_box.data.quality:
                     best_box = box
+            #else:
+            #    print self.question, vars(box) 
         if best_box is None:
             return -1
         else:
@@ -245,7 +248,7 @@ class SingleChoice(Choice):
         returns -1 if no answer exists
         '''
         best_box = None
-        for box in self.boxes[1:]:
+        for box in self.boxes[1:]: # WTF?!
             if box.data.state:
                 if best_box is None:
                     best_box = box
